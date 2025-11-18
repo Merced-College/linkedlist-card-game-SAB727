@@ -21,6 +21,12 @@ public class LinkedList
 		newLink.next = first;       // it points to old first link
 		first = newLink;            // now first points to this
 	}
+    
+	// Return whether the list is empty
+	public boolean isEmpty()
+	{
+		return first == null;
+	}
 	//-------------------------------------------------------------
 	public Link find(Card cardToFind)      // find link with given key
 	{                           // (assumes non-empty list)

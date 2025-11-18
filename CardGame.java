@@ -46,21 +46,19 @@ public class CardGame {
             System.err.println("Error reading file: " + e.getMessage());
         }
 
-        // Print the loaded cards
-        //System.out.println("Cards loaded:");
-        //cardList.displayList();
-		
-		Card[] playerHand = new Card[5];
-		for(int i = 0; i < playerHand.length; i++)
-			playerHand[i] = cardList.getFirst();
-		
-		System.out.println("players hand");
-		for(int i = 0; i < playerHand.length; i++)
-			System.out.println(playerHand[i]);
-		
-		System.out.println();
-		System.out.println("the deck");
-		cardList.displayList();
+        // Draw one card for the player's hand and display it
+        Card playerCard = null;
+        if (!cardList.isEmpty()) {
+            playerCard = cardList.getFirst();
+        }
+
+        System.out.println("Player drew:");
+        if (playerCard != null)
+            System.out.println(playerCard);
+        else
+            System.out.println("No card to draw (deck empty).");
+
+        System.out.println();
 
 	}//end main
 
