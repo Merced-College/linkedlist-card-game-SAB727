@@ -1,10 +1,10 @@
 
-public class LinkList
+public class LinkedList
 {
 	private Link first;            // ref to first link on list
 
 	//-------------------------------------------------------------
-	public LinkList()              // constructor
+	public LinkedList()              // constructor
 	{
 		first = null;               // no links on list yet
 	}

@@ -13,7 +13,7 @@ import java.util.Scanner;
 
 public class CardGame {
 	
-	private static LinkList cardList = new LinkList();  // make list
+	private static LinkedList cardList = new LinkedList();  // make list
 
 	public static void main(String[] args) {
 
@@ -47,8 +47,8 @@ public class CardGame {
         }
 
         // Print the loaded cards
-        System.out.println("Cards loaded:");
-        cardList.displayList();
+        //System.out.println("Cards loaded:");
+        //cardList.displayList();
 		
 		Card[] playerHand = new Card[5];
 		for(int i = 0; i < playerHand.length; i++)
