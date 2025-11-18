@@ -1,65 +1,67 @@
 //package linkedLists;
 
+//package linkedLists;
+
 import java.io.BufferedReader;
-import java.io.File;
-import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.io.IOException;
-//import java.util.ArrayList;
-//import java.util.List;
-import java.util.Scanner;
-
-
+import java.util.Random;
 
 public class CardGame {
-	
-	private static LinkedList cardList = new LinkedList();  // make list
 
-	public static void main(String[] args) {
+    public static void main(String[] args) {
+        String fileName = "cards.txt";
 
-		// File name to read from
-        String fileName = "cards.txt"; // Ensure the file is in the working directory or specify the full path
-
-        // Read the file and create Card objects
+        // Load cards into our LinkedList deck (preserve file order)
+        LinkedList deck = new LinkedList();
         try (BufferedReader br = new BufferedReader(new FileReader(fileName))) {
             String line;
             while ((line = br.readLine()) != null) {
-                // Split the line into components
-                String[] details = line.split(","); // Assuming comma-separated values
+                String[] details = line.split(",");
                 if (details.length == 4) {
-                    // Parse card details
                     String suit = details[0].trim();
                     String name = details[1].trim();
                     int value = Integer.parseInt(details[2].trim());
                     String pic = details[3].trim();
-
-                    // Create a new Card object
                     Card card = new Card(suit, name, value, pic);
-
-                    // Add the Card object to the list
-                    cardList.add(card);
-                } else {
-                    System.err.println("Invalid line format: " + line);
+                    deck.addLast(card);
                 }
             }
         } catch (IOException e) {
             System.err.println("Error reading file: " + e.getMessage());
+            return;
         }
 
-        // Draw one card for the player's hand and display it
+        if (deck.isEmpty()) {
+            System.out.println("Deck is empty. Ensure cards.txt is present and formatted correctly.");
+            return;
+        }
+
+        Random rnd = new Random();
+
+        // Draw random card for player
         Card playerCard = null;
-        if (!cardList.isEmpty()) {
-            playerCard = cardList.getFirst();
+        if (!deck.isEmpty()) {
+            int idx = rnd.nextInt(deck.size());
+            playerCard = deck.removeAt(idx);
         }
 
         System.out.println("Player drew:");
-        if (playerCard != null)
-            System.out.println(playerCard);
-        else
-            System.out.println("No card to draw (deck empty).");
+        if (playerCard != null) System.out.println(playerCard);
+        else System.out.println("No card to draw (deck empty).");
 
         System.out.println();
 
-	}//end main
+        // Draw random card for dealer
+        Card dealerCard = null;
+        if (!deck.isEmpty()) {
+            int idx = rnd.nextInt(deck.size());
+            dealerCard = deck.removeAt(idx);
+        }
 
-}//end class
+        System.out.println("Dealer drew:");
+        if (dealerCard != null) System.out.println(dealerCard);
+        else System.out.println("No card to draw (deck empty).");
+    }
+
+}

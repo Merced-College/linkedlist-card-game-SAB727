@@ -21,12 +21,62 @@ public class LinkedList
 		newLink.next = first;       // it points to old first link
 		first = newLink;            // now first points to this
 	}
-    
+
+	// Add to the end of the list (append). Useful for preserving input order.
+	public void addLast(Card card)
+	{
+		Link newLink = new Link(card);
+		if (first == null) {
+			first = newLink;
+			return;
+		}
+		Link current = first;
+		while (current.next != null) {
+			current = current.next;
+		}
+		current.next = newLink;
+	}
+
 	// Return whether the list is empty
 	public boolean isEmpty()
 	{
 		return first == null;
 	}
+
+	// Compute size by traversal
+	public int size()
+	{
+		int count = 0;
+		Link current = first;
+		while (current != null) {
+			count++;
+			current = current.next;
+		}
+		return count;
+	}
+
+	// Remove and return card at given index (0-based). Returns null if index out of range.
+	public Card removeAt(int index)
+	{
+		if (first == null) return null;
+		if (index <= 0) {
+			Link current = first;
+			first = first.next;
+			return current.cardLink;
+		}
+		Link prev = first;
+		Link current = first.next;
+		int i = 1;
+		while (current != null && i < index) {
+			prev = current;
+			current = current.next;
+			i++;
+		}
+		if (current == null) return null;
+		prev.next = current.next;
+		return current.cardLink;
+	}
+    
 	//-------------------------------------------------------------
 	public Link find(Card cardToFind)      // find link with given key
 	{                           // (assumes non-empty list)
