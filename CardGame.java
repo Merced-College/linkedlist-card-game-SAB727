@@ -1,3 +1,6 @@
+//Shane Bettis
+//11/25/2025
+
 //package linkedLists;
 
 //package linkedLists;
