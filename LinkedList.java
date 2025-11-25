@@ -133,6 +133,12 @@ public class LinkedList
 		return current.cardLink;
 	}
 
+	// Return a reference to the first Link without removing it
+	public Link getFirstLink()
+	{
+		return first;
+	}
+
 }  // end class LinkList
 ////////////////////////////////////////////////////////////////
 /*class LinkedLists
